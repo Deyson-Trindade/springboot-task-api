@@ -2,6 +2,7 @@ package com.notes.app.model;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -25,10 +26,11 @@ public class Chore {
     @Column(name = "finished", nullable = false)
     private boolean finished;
 
+    @CreationTimestamp
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
 
-    @CreationTimestamp
+    @UpdateTimestamp
     @Column(name = "updated_at", nullable = true)
     private Timestamp updated_at;
 
