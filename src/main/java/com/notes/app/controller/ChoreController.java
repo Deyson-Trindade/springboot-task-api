@@ -21,7 +21,8 @@ public class ChoreController {
 
     @GetMapping
     public List<Chore> getAllChores() {
-        return choresService.listAll();
+        List<Chore> chores = choresService.listAll();
+        return chores;
     }
 
     @PostMapping
