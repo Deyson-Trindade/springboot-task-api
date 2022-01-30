@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres:alpine
+    container_name: postgres02
+    environment:
+      - POSTGRES_DB=test
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=changeme
+    ports:
+      - 5433:5432
