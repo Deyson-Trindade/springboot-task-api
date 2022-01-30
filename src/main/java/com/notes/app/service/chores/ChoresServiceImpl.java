@@ -11,12 +11,6 @@ public class ChoresServiceImpl implements ChoresService {
 
     List<Chore> chores;
 
-    public ChoresServiceImpl() {
-        chores = new ArrayList<>();
-        chores.add(new Chore(true, "Take the trash out"));
-        chores.add(new Chore(true, "Take the trash out"));
-        chores.add(new Chore(true, "Take the trash out"));
-    }
 
     @Override
     public List<Chore> listAll() {

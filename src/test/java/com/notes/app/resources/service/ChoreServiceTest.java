@@ -43,10 +43,10 @@ public class ChoreServiceTest {
     @Test
     public void whenDeleteAChore_thenShowOneLessInTheList() {
 
-        Chore chore = new Chore(true, "Take the trash out");
+        //Chore chore = new Chore(true, "Take the trash out");
 
         int antes = choresService.listAll().size();
-        choresService.delete(chore);
+        //choresService.delete(chore);
         int depois = choresService.listAll().size();
 
         Assert.assertEquals(depois + 1, antes);
