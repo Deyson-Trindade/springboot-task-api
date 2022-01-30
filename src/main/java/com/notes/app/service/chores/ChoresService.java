@@ -9,4 +9,6 @@ public interface ChoresService {
     List<Chore> listAll();
 
     void delete(Chore chore);
+
+    Chore create(Chore chore);
 }
