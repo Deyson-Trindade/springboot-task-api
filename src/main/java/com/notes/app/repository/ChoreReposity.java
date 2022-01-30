@@ -4,6 +4,8 @@ import com.notes.app.model.Chore;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
-public class ChoreReposity extends JpaRepository<Chore, id> {
+public interface ChoreReposity extends JpaRepository<Chore, UUID> {
 }
