@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/chore")
@@ -21,8 +22,7 @@ public class ChoreController {
 
     @GetMapping
     public List<Chore> getAllChores() {
-        List<Chore> chores = choresService.listAll();
-        return chores;
+        return choresService.listAll();
     }
 
     @PostMapping
@@ -44,8 +44,11 @@ public class ChoreController {
         return new ResponseEntity<>(choreResponse, HttpStatus.CREATED);
     }
 
-    @DeleteMapping
-    public void delete() {
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable UUID id) {
 
+        choresService.delete(id);
+
+        return "Tarefa deletada";
     }
 }
