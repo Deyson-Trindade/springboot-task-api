@@ -2,9 +2,11 @@ package com.notes.app.controller;
 
 import com.notes.app.dto.ChoreRequest;
 import com.notes.app.dto.ChoreResponse;
-import com.notes.app.model.Chore;
+import com.notes.app.model.ChoreModel;
 import com.notes.app.service.chores.ChoresService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +19,16 @@ import java.util.UUID;
 @RequestMapping("/api/chore")
 public class ChoreController {
 
+    @Lazy
     @Autowired
-    ChoresService choresService;
+    private ChoresService choresService;
+
+    @Lazy
+    @Autowired
+    private ModelMapper modelMapper;
 
     @GetMapping
-    public List<Chore> getAllChores() {
+    public List<ChoreModel> getAllChores() {
         return choresService.listAll();
     }
 
@@ -29,26 +36,30 @@ public class ChoreController {
     public ResponseEntity<ChoreResponse> create(
             @RequestBody @Valid ChoreRequest choreRequest) {
 
-        Chore chore = new Chore();
+        ChoreModel convertedChoreModel = modelMapper.map(choreRequest, ChoreModel.class);
 
-        chore.setTitle(choreRequest.getTitle());
-        chore.setDescription(choreRequest.getDescription());
-        chore.setFinished(choreRequest.isFinished());
+        ChoreModel persistedChoreModel = choresService.create(convertedChoreModel);
 
-        choresService.create(chore);
-
-        ChoreResponse choreResponse = new ChoreResponse();
-        choreResponse.setTitle(choreRequest.getTitle());
-        choreResponse.setDescription(choreRequest.getDescription());
-        choreResponse.setFinished(choreResponse.isFinished());
-        return new ResponseEntity<>(choreResponse, HttpStatus.CREATED);
+        return new ResponseEntity<>(modelMapper.map(persistedChoreModel, ChoreResponse.class), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable UUID id) {
+    public void delete(@PathVariable UUID id) {
 
         choresService.delete(id);
 
-        return "Tarefa deletada";
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ChoreResponse> update(@PathVariable @Valid UUID id,
+                                                @RequestBody @Valid ChoreRequest choreRequest) {
+
+        ChoreModel convertedChoreModel = modelMapper.map(choreRequest, ChoreModel.class);
+
+        ChoreModel persistedChoreModel = choresService.update(convertedChoreModel);
+
+        return new ResponseEntity<>(modelMapper.map(persistedChoreModel, ChoreResponse.class), HttpStatus.OK);
+
+    }
+
 }
