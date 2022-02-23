@@ -11,7 +11,7 @@
 
         <preConditions onFail="CONTINUE">
             <not>
-                <tableExists tableName="chore"/>
+                <tableExists tableName="choreModel"/>
             </not>
         </preConditions>
 

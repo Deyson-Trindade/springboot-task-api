@@ -1,6 +1,5 @@
-package com.notes.app.model;
+package com.notes.app.entity;
 
-import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -9,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "chore")
-public class Chore {
+public class ChoreEntity {
 
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO)
