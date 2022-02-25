@@ -17,3 +17,7 @@ spring:
     drop-first: false
     change-log: classpath:liquibase/schema/public/schema-public-master.xml
     default-schema: public
+
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false

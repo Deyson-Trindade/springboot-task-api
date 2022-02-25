@@ -38,6 +38,7 @@ public class ChoresServiceImpl implements ChoresService {
     @Override
     public ChoreModel create(final ChoreModel choreModel) {
 
+        assert choreModel.getTitle() != null && !choreModel.getTitle().isEmpty() : "Errinho aqui";
         final ChoreEntity choreEntity = modelMapper.map(choreModel, ChoreEntity.class);
 
         choreRepository.save(choreEntity);

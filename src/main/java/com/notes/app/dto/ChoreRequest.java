@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class ChoreRequest {
 
-    @NotBlank
     private String title;
 
     @NotBlank
