@@ -32,11 +32,9 @@ public class LoggerAspect {
             result = proceedingJoinPoint.proceed();
             final String resultAsJson = OBJECT_MAPPER.writeValueAsString(result);
             LOGGER.info("Exiting {} with value {}", fullyQualifyMethodName, resultAsJson);
-            return result;
         } catch (Exception e) {
             LOGGER.error("Exiting {} with an exception {}", fullyQualifyMethodName, e);
         }
-
         return result;
     }
 
